@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Accounts
+from .models import Accounts, Company
 from django.contrib.auth.models import User
 
 
@@ -16,3 +16,9 @@ class AccountsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Accounts
         fields = ("user", "phone", "direction")
+
+class CompanySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Company
+        fields = ("name", "phone", "direction")

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics, status
-from .models import Accounts
-from .serilizers import AccountsSerializer
+from .models import Accounts, Company
+from .serilizers import AccountsSerializer, CompanySerializer
 from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -12,6 +12,11 @@ from rest_framework.views import APIView
 class UserListAPIView(generics.ListAPIView):
     queryset = Accounts.objects.all()
     serializer_class = AccountsSerializer
+
+class CompanyListCreateAPIView(generics.ListCreateAPIView):
+
+    queryset = Company.objects.all()
+    serializer_class = CompanySerializer
 
 class LoginAPIView(APIView):
 

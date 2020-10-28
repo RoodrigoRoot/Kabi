@@ -9,3 +9,10 @@ class Product(models.Model):
     description = models.TextField(verbose_name=("Descripción"))
     created_at = models.DateField(auto_now=False, auto_now_add=True)
     updated_at = models.DateField(auto_now=True, auto_now_add=False)
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = "Producto"
+        verbose_name_plural = "Productos"

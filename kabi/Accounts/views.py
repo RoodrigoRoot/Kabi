@@ -5,7 +5,8 @@ from .serilizers import AccountsSerializer, CompanySerializer
 from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
+from django.views import View
+from django.contrib.auth import logout
 # Create your views here.
 
 
@@ -13,7 +14,7 @@ class UserListAPIView(generics.ListAPIView):
     queryset = Accounts.objects.all()
     serializer_class = AccountsSerializer
 
-class CompanyListCreateAPIView(generics.ListCreateAPIView):
+class CompanyListAPIView(generics.ListAPIView):
 
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
@@ -29,3 +30,16 @@ class LoginAPIView(APIView):
             return Response({"token": user.auth_token.key})
         else:
             return Response({"error": "Wrong Credentials"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+class CompanyView(View):
+
+    def get(self, request, *args , **kwargs):
+
+        return render(request, 'base.html', locals())
+
+
+def logout_view(request):
+    logout(request)
+    return redirect(reverse("home"))
